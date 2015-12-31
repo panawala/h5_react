@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { loadPlay, loadPrice } from '../actions'
 
-
 class GoodsPage extends Component {
     constructor(props) {
         super(props)
@@ -59,6 +58,7 @@ class GoodsPage extends Component {
     submitOrder() {
         console.log('submit order')
         console.log(this.state)
+        location.href = '/orders/order1212121'
     }
 
     selectPlay(play, evt) {
