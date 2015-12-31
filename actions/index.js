@@ -15,8 +15,8 @@ export const PLAYS_FAILURE = 'PLAYS_FAILURE'
 
 export function loadPlay(feedId) {
     return (dispatch, getState) => {
-        const plays = getState().plays
-        if (plays.plays.length > 0) {
+        const goods = getState().goods
+        if (goods.plays.length > 0) {
             return null
         }
 
@@ -48,11 +48,6 @@ export function loadPrice(playId) {
     console.log('loading price')
     console.log(playId)
     return (dispatch, getState) => {
-        const prices = getState().prices
-        if (prices.prices.length > 0) {
-            return null
-        }
-
         return dispatch(fetchPrices(playId))
     }
 }
@@ -68,23 +63,3 @@ function fetchPrices(playId) {
     }
 }
 
-export const SET_QUANTITY = 'SET_QUANTITY'
-export const INCR_QUANTITY = 'INCR_QUANTITY'
-export const DECR_QUANTITY = 'DECR_QUANTITY'
-export function setQuantity(quantity){
-    return (dispatch, getState) => {
-        return dispatch({type: SET_QUANTITY, quantity: quantity})
-    }
-}
-
-export function incrQuantity(){
-    return (dispatch, getState) => {
-        return dispatch({type: INCR_QUANTITY})
-    }
-}
-
-export function decrQuantity(){
-    return (dispatch, getState) => {
-        return dispatch({type: DECR_QUANTITY})
-    }
-}

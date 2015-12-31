@@ -4,74 +4,38 @@ import { routerStateReducer as router } from 'redux-router'
 import { combineReducers } from 'redux'
 
 
-function plays(state = {isFetching: false, plays: []}, action) {
+function goods(state = {isFetching: false, plays: [], prices: []}, action) {
     const { type } = action
 
-    const [ requestType, successType, failureType ] = [
-        ActionTypes.PLAYS_REQUEST,
-        ActionTypes.PLAYS_SUCCESS,
-        ActionTypes.PLAYS_FAILURE
-    ]
-
     switch (type) {
-        case requestType:
+        case ActionTypes.PLAYS_REQUEST:
             return merge({}, state, {
                 isFetching: true
             })
-        case successType:
+        case ActionTypes.PLAYS_SUCCESS:
             return merge({}, state, {
                 isFetching: false,
-                plays: action.response
+                plays: action.response,
+                selectedPlay: action.response[0]
             })
-        case failureType:
+        case ActionTypes.PLAYS_FAILURE:
             return merge({}, state, {
                 isFetching: false
             })
-        default:
-            return state
-    }
-}
-
-
-function prices(state = {isFetching: false, prices: []}, action) {
-    const { type } = action
-
-    const [ requestType, successType, failureType ] = [
-        ActionTypes.PRICES_REQUEST,
-        ActionTypes.PRICES_SUCCESS,
-        ActionTypes.PRICES_FAILURE
-    ]
-
-    switch (type) {
-        case requestType:
+        case ActionTypes.PRICES_REQUEST:
             return merge({}, state, {
                 isFetching: true
             })
-        case successType:
+        case ActionTypes.PRICES_SUCCESS:
             return merge({}, state, {
                 isFetching: false,
-                prices: action.response
+                prices: action.response,
+                selectedPrice: action.response[0]
             })
-        case failureType:
+        case ActionTypes.PRICES_FAILURE:
             return merge({}, state, {
                 isFetching: false
             })
-        default:
-            return state
-    }
-}
-
-function quantity(state = 1, action) {
-    console.log('quantity action....')
-    console.log(action)
-    const { type } = action
-    switch (type) {
-        case ActionTypes.SET_QUANTITY:
-            return action.quantity
-        case ActionTypes.INCR_QUANTITY:
-            return state + 1
-        case ActionTypes.DECR_QUANTITY:
-            return state - 1
         default:
             return state
     }
@@ -91,9 +55,7 @@ function errorMessage(state = null, action) {
 }
 
 const rootReducer = combineReducers({
-    prices,
-    plays,
-    quantity,
+    goods,
     errorMessage,
     router
 })
