@@ -2,20 +2,238 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <title>Redux real-world example</title>
     <style>
-         .play {
-             display: inline-block;
-             height: 30px;
-             line-height: 30px;
-             background-color: #d94648;
-             text-align: center;
-             color: #fff;
-             margin: 0 5px;
-             padding: 0 5px;
-             text-decoration: none;
-         }
+
+        html, body {
+            margin: 0;
+            background-color: #F0F0F0;
+            padding: 0 0 50px;
+        }
+        .container {
+            background-color: #FFFFFF;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+        }
+
+        .container .icon {
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+            vertical-align: middle;
+        }
+
+        .container .icon-text {
+            display: inline-block;
+            height: 25px;
+            line-height: 25px;
+            vertical-align: middle;
+            padding-left: 10px;
+            font-size: 1.1em;
+        }
+
+        .container .icon-sub-text {
+            display: inline-block;
+            height: 20px;
+            line-height: 20px;
+            vertical-align: sub;
+            color: #ff0000;
+            padding-left: 10px;
+            font-size: 1em;
+        }
+
+
+        .list{
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .list a {
+            display: inline-block;
+            color: #fff;
+            background-color: #d94648;
+            padding: 10px;
+            width: 30%;
+            margin: 10px 10px 0 0;
+            text-align: center;
+            box-sizing: border-box;
+            text-decoration: none;
+        }
+
+        .list .counter {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background-color: #d94648;
+            color: #fff;
+            font-size: 1em;
+            line-height: 40px;
+            text-align: center;
+        }
+
+        .list .quantity-tip {
+            padding-left: 10px;
+            font-size: 0.8em;
+            color: #404257;
+        }
+
+        .list input {
+            display: inline-block;
+            height: 40px;
+            border: none;
+            border-top: 1px solid #979797;
+            border-bottom: 1px solid #979797;
+            vertical-align: middle;
+            text-align: center;
+            font-size: 1em;
+            box-sizing: border-box;
+            width: 50px;
+        }
+
+        .red-box {
+            border: 1px solid #d94648;
+            position: relative;
+            height: 70px;
+        }
+
+        .red-box .upper {
+            position: absolute;
+            left: 100px;
+            top: 15px;
+            font-weight: bold;
+        }
+        .red-box .downer {
+            position: absolute;
+            left: 100px;
+            bottom: 15px;
+            color: #404257;
+            font-size: 0.8em;
+        }
+
+        .red-box .left-circle {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 1px #d94648 solid;
+            border-left: 0 #fff solid;
+            border-radius: 0 40px 40px 0;
+            left: -1px;
+            top: 50%;
+            margin-top: -10px;
+            background-color: #fff;
+        }
+
+        .red-box .order-type-text {
+            position: absolute;
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            margin-top: -25px;
+            top: 50%;
+            left: 30px;
+            color: #d94648;
+            border-right: 1px #d94648 dotted;
+            padding-right: 10px;
+        }
+
+        .toolbar {
+            position: fixed;
+            height: 50px;
+            line-height: 50px;
+            background-color: #d94648;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            color: #ffffff;
+        }
+        .toolbar .info {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background-color: #333333;
+            right: 40%;
+            padding-left: 20px;
+        }
+        .toolbar .confirm a {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 40%;
+            text-align: center;
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+
+        .order-container {
+            width: 95%;
+            background-color: #fff;
+            padding: 30px 10px;
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
+
+        .order-item {
+            box-sizing: border-box;
+            border-bottom: 1px #979797 solid;
+            padding: 10px 0;
+        }
+        .title {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        .sub-title {
+            display: block;
+            padding: 5px 0 10px 0;
+            color: #9b9b9b;
+        }
+
+        .bold {
+            font-weight: bold;
+            color: #000;
+        }
+        .order-text {
+            display: block;
+            padding: 2px 0;
+        }
+
+        .clearfix { *zoom: 1;}
+        .clearfix:after{ content: ""; display: block; height: 0; visibility:hidden; clear: both;}
+        .fl {
+            float: left;
+        }
+        .fr {
+            float: right;
+        }
+        .m20 {
+            margin: 20px 0;
+        }
+
+        .emphasize {
+            color: #d94648;
+        }
+
+        .order-contact {
+            margin: 20px auto;
+            text-align: center;
+        }
+        .logo {
+            width: 80px;
+        }
+        .contact {
+            padding: 10px;
+        }
+        .tip {
+            font-weight: bold;
+        }
+        .tel {
+            color: #0029ed;
+        }
+
     </style>
 </head>
 <body>

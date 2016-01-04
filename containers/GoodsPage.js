@@ -74,14 +74,14 @@ class GoodsPage extends Component {
 
     renderPlay(play) {
         return (
-            <a className="play" href="javascript:void(0);" key={play.id}
+            <a href="javascript:void(0);" key={play.id}
                onClick={ (event) => this.selectPlay(play, event) }>{play.desc}</a>
         )
     }
 
     renderPrice(price) {
         return (
-            <a className="play" href="javascript:void(0);" key={price.id}
+            <a href="javascript:void(0);" key={price.id}
                onClick={ (event) => this.selectPrice(price, event) }>{price.price}元</a>
         )
     }
@@ -91,19 +91,59 @@ class GoodsPage extends Component {
             <div>
                 <div>场次</div>
                 <hr />
-                { this.props.goods.plays.map(this.renderPlay) }
-                <div>价格</div>
-                { this.props.goods.prices.map(this.renderPrice) }
-                <div>购买数量</div>
-                <input value={ this.state.quantity } readOnly />
-                <button onClick={ this.increaseQuantity }>+</button>
-                {' '}
-                <button onClick={ this.decreaseQuantity }>-</button>
+
+                <div className="container">
+                    <img className="icon" src="http://7tszlo.com1.z0.glb.clouddn.com/2d6fad02-b2bf-11e5-8f90-00163e023969.png" />
+                    <span className="icon-text">选择场次</span>
+                    <span className="icon-sub-text">3-21 12:00</span>
+                    <div className="list">
+                        { this.props.goods.plays.map(this.renderPlay) }
+                    </div>
+                </div>
+                <div className="container">
+                    <img className="icon" src="http://7tszlo.com1.z0.glb.clouddn.com/ed595688-b2c7-11e5-8f90-00163e023969.png" />
+                    <span className="icon-text">选择票价</span>
+                    <span className="icon-sub-text">￥80</span>
+                    <div className="list">
+                        { this.props.goods.prices.map(this.renderPrice) }
+                    </div>
+                </div>
+
+                <div className="container">
+                    <img className="icon" src="http://7tszlo.com1.z0.glb.clouddn.com/a5e04f72-b2c8-11e5-8f90-00163e023969.png" />
+                    <span className="icon-text">购买数量</span>
+                    <span className="icon-sub-text">2张</span>
+                    <div className="list">
+                        <input className="counter" value="-"  onClick={ this.decreaseQuantity } readOnly/>
+                        <input value={ this.state.quantity } />
+                        <input className="counter" value="+" onClick={ this.increaseQuantity } readOnly/>
+                        <span className="quantity-tip">每笔限购6张|库存20张</span>
+                    </div>
+                </div>
+
+                <div className="container">
+                    <img className="icon" src="http://7tszlo.com1.z0.glb.clouddn.com/36c34024-b2d0-11e5-8f90-00163e023969.png" />
+                    <span className="icon-text">取票方式</span>
+                    <span className="icon-sub-text">电子票</span>
+                    <div className="list">
+                        <div className="red-box">
+                            <div className="left-circle"></div>
+                            <span className="order-type-text">电子票</span>
+                            <span className="upper">接收手机号18801790923</span>
+                            <span className="downer">在订单成交后会收到取票密码，接收免费</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="toolbar">
+                    <div className="info" id="total_price">共：0元</div>
+                    <div className="confirm">
+                        <a href="javascript:void(0);" onClick={ this.submitOrder }>提交订单</a>
+                    </div>
+                </div>
+
                 <div>
                     <span>{ JSON.stringify(this.state) }</span>
-                </div>
-                <div>
-                    <button onClick={ this.submitOrder }>提交订单</button>
                 </div>
                 <div>
                     { this.props.isFetching? <img src="http://dribbble.s3.amazonaws.com/users/45269/screenshots/1300220/loading_1.gif" />: <hr/> }
